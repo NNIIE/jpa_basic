@@ -6,13 +6,20 @@ import java.util.Date;
 @Entity
 public class Member {
 
-    @Id
+    @Id @GeneratedValue
+    @Column(name = "MEMBER_ID")
     private String id;
 
-    @Column(name = "name")
+    @Column(name = "USERNAME")
     private String username;
 
-    public Member() {}
+    // 데이터베이스 기반 설계
+//    @Column(name = "TEAM_ID")
+//    private Long teamId;
+
+    @ManyToOne
+    @JoinColumn(name = "TEAM_ID")
+    private Team team;
 
     public String getId() {
         return id;
@@ -28,5 +35,13 @@ public class Member {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 }
